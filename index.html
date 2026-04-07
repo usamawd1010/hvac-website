@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Al Mutamayiza Fast Est. | HVAC Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --gold: #d4af37;
+            --light: #f5f5f5;
+            --text: #333;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .logo-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        .menu-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            height: 100vh;
+            background: var(--primary);
+            z-index: 1001;
+            transition: right 0.3s ease;
+            padding: 2rem 1.5rem;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .close-menu {
+            color: white;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+        
+        .menu-links {
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .menu-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Hero Section with Image */
+        .hero {
+            margin-top: 60px;
+            position: relative;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 3rem 1.5rem;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(26,26,46,0.85), rgba(22,33,62,0.9));
+            z-index: -1;
+        }
+        
+        .hero h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero .highlight {
+            color: var(--gold);
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .cta-btn {
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.4);
+            transform: translateY(0);
+            transition: transform 0.2s;
+            z-index: 1;
+        }
+        
+        .cta-btn:active {
+            transform: translateY(2px);
+        }
+        
+        /* Brand Strip */
+        .brands {
+            background: white;
+            padding: 1.5rem 1rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .brands-track {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            min-width: max-content;
+        }
+        
+        .brand-item {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+            opacity: 0.7;
+            white-space: nowrap;
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 2.5rem 1.5rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        /* Image Cards */
+        .img-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .img-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .img-card-content {
+            padding: 1.5rem;
+        }
+        
+        .img-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .img-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        /* Services Grid with Images */
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .service-box {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: transform 0.2s;
+        }
+        
+        .service-box:active {
+            transform: scale(0.98);
+        }
+        
+        .service-box img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+        
+        .service-box-content {
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .service-box h4 {
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+        
+        /* Projects with Images */
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .project-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .project-header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+        }
+        
+        .project-header h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .project-header span {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+        
+        .project-body {
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+        }
+        
+        .project-type {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .project-value {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        /* Gallery Grid */
+        .gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .gallery img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        /* Equipment Showcase */
+        .equipment-scroll {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 1rem 0;
+            scroll-snap-type: x mandatory;
+        }
+        
+        .equipment-item {
+            min-width: 280px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            scroll-snap-align: start;
+        }
+        
+        .equipment-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .equipment-info {
+            padding: 1rem;
+        }
+        
+        .equipment-info h4 {
+            color: var(--primary);
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .equipment-info p {
+            color: #666;
+            font-size: 0.85rem;
+        }
+        
+        /* Stats */
+        .stats {
+            background: var(--primary);
+            color: white;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+        }
+        
+        .stat-item h3 {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 0.25rem;
+        }
+        
+        .stat-item p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* Contact */
+        .contact {
+            background: white;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: 8px;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 2rem 1.5rem;
+            text-align: center;
+        }
+        
+        .footer p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        .footer p:last-child {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        /* Hide scrollbars */
+        .brands::-webkit-scrollbar,
+        .equipment-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .brands,
+        .equipment-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Responsive */
+        @media (min-width: 768px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">ME</div>
+                <div class="logo-text">Al Mutamayiza<br>Fast Est.</div>
+            </div>
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="overlay" onclick="toggleMenu()"></div>
+    <nav class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" onclick="toggleMenu()">✕</button>
+        <div class="menu-links">
+            <a href="#home" onclick="toggleMenu()">Home</a>
+            <a href="#about" onclick="toggleMenu()">About Us</a>
+            <a href="#services" onclick="toggleMenu()">Services</a>
+            <a href="#projects" onclick="toggleMenu()">Projects</a>
+            <a href="#equipment" onclick="toggleMenu()">Equipment</a>
+            <a href="#contact" onclick="toggleMenu()">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero with Background Image -->
+    <section class="hero" id="home">
+        <img src="https://kimi-web-img.moonshot.cn/img/irp.cdn-website.com/d24c2ead2c4586f112bca4f619538d3e9f70ab0d.jpeg" alt="HVAC Rooftop Units" class="hero-bg">
+        <div class="hero-overlay"></div>
+        <h1>Premium <span class="highlight">HVAC Solutions</span> for Saudi Arabia</h1>
+        <p>Over 30 years of excellence in Heating, Ventilation & Air Conditioning systems. Authorized dealers for Carrier, York, Trane, and Gree.</p>
+        <a href="#contact" class="cta-btn">Get a Quote</a>
+    </section>
+
+    <!-- Brands -->
+    <div class="brands">
+        <div class="brands-track">
+            <div class="brand-item">CARRIER</div>
+            <div class="brand-item">YORK</div>
+            <div class="brand-item">TRANE</div>
+            <div class="brand-item">GREENHECK</div>
+            <div class="brand-item">GREE</div>
+            <div class="brand-item">SAMSUNG</div>
+            <div class="brand-item">LG</div>
+        </div>
+    </div>
+
+    <!-- About with Image -->
+    <section id="about">
+        <h2 class="section-title">Who We Are</h2>
+        
+        <div class="img-card">
+            <img src="https://kimi-web-img.moonshot.cn/img/transform.octanecdn.com/c58ea2fbda4358e7946fc979f14bda2bed8498da.jpg" alt="Commercial HVAC Systems">
+            <div class="img-card-content">
+                <h3>30+ Years of Excellence</h3>
+                <p>Founded over three decades ago in Jeddah, Al Mutamayiza Fast Establishment has grown from a local trading business into a leading HVAC solutions provider. We specialize in projects, operation & maintenance, manufacturing, and trading.</p>
+            </div>
+        </div>
+
+        <div class="img-card">
+            <img src="https://kimi-web-img.moonshot.cn/img/hmfduct.com/ea51d84b29bcd9d2e9e0d4270fe7b1f3aa1e31f7.png" alt="Ductwork Installation">
+            <div class="img-card-content">
+                <h3>SMACNA Certified Standards</h3>
+                <p>We follow SMACNA (Sheet Metal and Air Conditioning Contractors' National Association) standards for all duct fabrication, installation, and insulation cladding works.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services with Images -->
+    <section id="services" style="background: #f9f9f9;">
+        <h2 class="section-title">Our Services</h2>
+        
+        <div class="services-grid">
+            <div class="service-box">
+                <img src="https://kimi-web-img.moonshot.cn/img/images.carriercms.com/4422ec0924ef099775aacc7214a96049021cb8a0.jpg" alt="Chiller Systems">
+                <div class="service-box-content">
+                    <h4>Chiller Systems</h4>
+                </div>
+            </div>
+            <div class="service-box">
+                <img src="https://kimi-web-img.moonshot.cn/img/t3.ftcdn.net/5a4c1e85ad9aa5b854e67ad351f130d1dfdcfa84.jpg" alt="Ductwork">
+                <div class="service-box-content">
+                    <h4>Ductwork</h4>
+                </div>
+            </div>
+            <div class="service-box">
+                <img src="https://kimi-web-img.moonshot.cn/img/www.hoodmart.com/9e7b215cb8ac8ef532c49d6a06f5078c7b8ea031.jpg" alt="Kitchen Exhaust">
+                <div class="service-box-content">
+                    <h4>Kitchen Exhaust</h4>
+                </div>
+            </div>
+            <div class="service-box">
+                <img src="https://kimi-web-img.moonshot.cn/img/i5.walmartimages.com/5b76d2af0eed36d10f6125d58a7dfc823cb51776.jpeg" alt="Air Diffusers">
+                <div class="service-box-content">
+                    <h4>Air Diffusers</h4>
+                </div>
+            </div>
+            <div class="service-box">
+                <img src="https://kimi-web-img.moonshot.cn/img/eldridgeusa.com/15df9cc3949354b598e954d76bb4edae961235b6.jpg" alt="Ventilation Fans">
+                <div class="service-box-content">
+                    <h4>Ventilation</h4>
+                </div>
+            </div>
+            <div class="service-box">
+                <img src="https://kimi-web-img.moonshot.cn/img/img.alkhn.com/3f402a9ed2ef35836d7333cf94f12732b99ae27b.png" alt="Gree AC">
+                <div class="service-box-content">
+                    <h4>AC Units</h4>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 1.5rem;">
+            <div class="img-card">
+                <img src="https://kimi-web-img.moonshot.cn/img/sfihospitality.ca/caa3ee158654376b4b559d3e0534c47f715cc277.jpg" alt="Commercial Kitchen">
+                <div class="img-card-content">
+                    <h3>EPC Projects</h3>
+                    <p>Complete HVAC system solutions from concept to commissioning. Design, supply, installation & maintenance for residential, commercial & industrial projects.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Equipment Showcase (Horizontal Scroll) -->
+    <section id="equipment">
+        <h2 class="section-title">Our Brands & Equipment</h2>
+        
+        <div class="equipment-scroll">
+            <div class="equipment-item">
+                <img src="https://kimi-web-img.moonshot.cn/img/images.carriercms.com/cd34f1bae8ec9f4cc0fd7bb22973b9f86dc2ee8a.jpg" alt="Carrier Chiller">
+                <div class="equipment-info">
+                    <h4>Carrier Chillers</h4>
+                    <p>Industrial & Commercial Solutions</p>
+                </div>
+            </div>
+            <div class="equipment-item">
+                <img src="https://kimi-web-img.moonshot.cn/img/acdepotltd.com/54ef28be7ea96a70a0f541793b4e62187fb1a7d1.jpg" alt="Gree VRF">
+                <div class="equipment-info">
+                    <h4>Gree VRF Systems</h4>
+                    <p>Variable Refrigerant Flow Technology</p>
+                </div>
+            </div>
+            <div class="equipment-item">
+                <img src="https://kimi-web-img.moonshot.cn/img/5.imimg.com/7fa6a983d2432aa60a6054ec1524a87f6ddc8a19.jpg" alt="Ventilation">
+                <div class="equipment-info">
+                    <h4>Ventilation Systems</h4>
+                    <p>Industrial & Commercial Fans</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="stat-item">
+            <h3>30+</h3>
+            <p>Years Experience</p>
+        </div>
+        <div class="stat-item">
+            <h3>36+</h3>
+            <p>Major Projects</p>
+        </div>
+        <div class="stat-item">
+            <h3>24/7</h3>
+            <p>Support</p>
+        </div>
+        <div class="stat-item">
+            <h3>KSA</h3>
+            <p>Nationwide</p>
+        </div>
+    </section>
+
+    <!-- Projects with Images -->
+    <section id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        
+        <div class="project-card">
+            <img src="https://kimi-web-img.moonshot.cn/img/irp.cdn-website.com/d24c2ead2c4586f112bca4f619538d3e9f70ab0d.jpeg" alt="Al Salam Mall Project" class="project-img">
+            <div class="project-header">
+                <h4>Al Salam Mall</h4>
+                <span>Al Mutamayiza Fast Est. (Direct)</span>
+            </div>
+            <div class="project-body">
+                <span class="project-type">Ducting Supply & Installation</span>
+                <span class="project-value">10M SAR</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <img src="https://kimi-web-img.moonshot.cn/img/hmfduct.com/ea51d84b29bcd9d2e9e0d4270fe7b1f3aa1e31f7.png" alt="Hajj Terminal" class="project-img">
+            <div class="project-header">
+                <h4>Hajj Terminal Airport</h4>
+                <span>Saudi Ritco</span>
+            </div>
+            <div class="project-body">
+                <span class="project-type">Ducting Supply & Installation</span>
+                <span class="project-value">400K SAR</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <img src="https://kimi-web-img.moonshot.cn/img/images.carriercms.com/4422ec0924ef099775aacc7214a96049021cb8a0.jpg" alt="Mandura Compound" class="project-img">
+            <div class="project-header">
+                <h4>Mandura Compound</h4>
+                <span>Al Mutamayiza Fast Est. (Direct)</span>
+            </div>
+            <div class="project-body">
+                <span class="project-type">Complete HVAC System</span>
+                <span class="project-value">1.2M SAR</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <img src="https://kimi-web-img.moonshot.cn/img/t3.ftcdn.net/5a4c1e85ad9aa5b854e67ad351f130d1dfdcfa84.jpg" alt="Al Tassan Compound" class="project-img">
+            <div class="project-header">
+                <h4>Al Tassan Compound</h4>
+                <span>Al Mutamayiza Fast Est. (Direct)</span>
+            </div>
+            <div class="project-body">
+                <span class="project-type">Complete HVAC System</span>
+                <span class="project-value">750K SAR</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <img src="https://kimi-web-img.moonshot.cn/img/www.hoodmart.com/9e7b215cb8ac8ef532c49d6a06f5078c7b8ea031.jpg" alt="S. Fakih Hospital" class="project-img">
+            <div class="project-header">
+                <h4>S. Fakih Hospital</h4>
+                <span>S.T.S</span>
+            </div>
+            <div class="project-body">
+                <span class="project-type">Ducting Installation</span>
+                <span class="project-value">950K SAR</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section style="background: #f9f9f9;">
+        <h2 class="section-title">Project Gallery</h2>
+        <div class="gallery">
+            <img src="https://kimi-web-img.moonshot.cn/img/t3.ftcdn.net/5a4c1e85ad9aa5b854e67ad351f130d1dfdcfa84.jpg" alt="Ductwork">
+            <img src="https://kimi-web-img.moonshot.cn/img/hmfduct.com/ea51d84b29bcd9d2e9e0d4270fe7b1f3aa1e31f7.png" alt="Commercial Ducts">
+            <img src="https://kimi-web-img.moonshot.cn/img/sfihospitality.ca/caa3ee158654376b4b559d3e0534c47f715cc277.jpg" alt="Kitchen HVAC">
+            <img src="https://kimi-web-img.moonshot.cn/img/eldridgeusa.com/15df9cc3949354b598e954d76bb4edae961235b6.jpg" alt="Ventilation">
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">Contact Us</h2>
+        
+        <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+                <strong>Address</strong><br>
+                P.O. Box 5523, Jeddah, Kingdom of Saudi Arabia
+            </div>
+        </div>
+        
+        <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+                <strong>Phone</strong><br>
+                +966 50 568 2383<br>
+                +966 50 559 0031
+            </div>
+        </div>
+        
+        <div class="contact-item">
+            <div class="contact-icon">📱</div>
+            <div>
+                <strong>Mobile</strong><br>
+                +966 55 654 8665
+            </div>
+        </div>
+        
+        <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+                <strong>Email</strong><br>
+                info@almutamayiza.com
+            </div>
+        </div>
+
+        <div style="margin-top: 2rem; text-align: center;">
+            <a href="tel:+966505682383" class="cta-btn" style="display: block; width: 100%; text-align: center;">Call Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Al Mutamayiza Fast Establishment.<br>All rights reserved.</p>
+        <p>Licensed HVAC Contractor | CR: 101026471 | SMACNA Certified</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+            document.querySelector('.overlay').classList.toggle('active');
+            document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('active') ? 'hidden' : '';
+        }
+        
+        // Close menu on resize if open
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                document.getElementById('mobileMenu').classList.remove('active');
+                document.querySelector('.overlay').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+
+</body>
+</html>
